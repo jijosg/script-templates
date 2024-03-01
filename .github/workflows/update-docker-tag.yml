@@ -9,7 +9,7 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
       - name: Find latest tag & Update Dockerfile
         run: |
           LATEST_TAG=$(curl -s 'https://hub.docker.com/v2/repositories/library/ubuntu/tags' -H 'Content-Type: application/json' | jq -r '.results[]| .name' | grep jammy |head -n 1)
