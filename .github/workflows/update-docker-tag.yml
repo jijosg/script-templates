@@ -10,12 +10,10 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
-      - name: Find latest tag
+      - name: Find latest tag & Update Dockerfile
         run: |
           LATEST_TAG=$(curl -s 'https://hub.docker.com/v2/repositories/library/ubuntu/tags' -H 'Content-Type: application/json' | jq -r '.results[]| .name' | grep jammy |head -n 1)
           echo "Latest tag: $LATEST_TAG"
-      - name: Update Dockerfile
-        run: |
           sed -i "s/FROM ubuntu:.*/FROM ubuntu:$LATEST_TAG/" docker/create-custom-user-ubuntu
       - name: Commit and push changes
         run: |
