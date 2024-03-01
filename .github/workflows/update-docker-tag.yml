@@ -1,4 +1,4 @@
-name: Update docker tag
+name: Update docker tag to latest
 
 on:
   workflow_dispatch:
