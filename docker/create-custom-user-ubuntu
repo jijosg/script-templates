@@ -1,17 +1,17 @@
-# syntax=docker/dockerfile:1.3-labs
+# syntax=docker/dockerfile:1.6.0
 
-FROM ubuntu:focal-20220105
+FROM ubuntu:jammy-20240212
 
-# Set up a custom user jijo 
+# Set up a custom user anka 
 
 RUN <<EOF
-useradd --create-home --shell /bin/bash jijo
+useradd --create-home --shell /bin/bash anka
 apt-get update
-apt-get install --no-install-recommends -y git=2.25.1
+apt-get install --no-install-recommends -y git
 apt-get clean
 rm -rf /var/lib/apt/lists/*
 EOF
 
-USER jijo
-WORKDIR /home/jijo
+USER anka
+WORKDIR /home/anka
 RUN whoami

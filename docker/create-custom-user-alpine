@@ -1,0 +1,15 @@
+# syntax=docker/dockerfile:1.6.0
+
+FROM alpine:3.19.1
+
+# Set up a custom user anka 
+
+RUN <<EOF
+NEWUSER='anka'
+adduser -g "${NEWUSER}" $NEWUSER
+apk add --no-cache git
+EOF
+
+USER anka
+WORKDIR /home/anka
+RUN whoami
