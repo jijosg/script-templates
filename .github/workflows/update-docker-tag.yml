@@ -2,6 +2,8 @@ name: Update docker tag
 
 on:
   workflow_dispatch:
+  schedule:
+    - cron: "0 0 */2 * *"
 
 jobs:
   update_image:
