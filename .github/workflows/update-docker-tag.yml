@@ -1,3 +1,5 @@
+name: Update docker tag
+
 on:
   workflow_dispatch:
 
