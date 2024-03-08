@@ -16,8 +16,11 @@ jobs:
         run: |
           LATEST_TAG=$(curl -s 'https://hub.docker.com/v2/repositories/library/ubuntu/tags' -H 'Content-Type: application/json' | jq -r '.results[]| .name' | grep jammy |head -n 1)
           echo "Latest tag: $LATEST_TAG"
-          sed -i "s/FROM ubuntu:.*/FROM ubuntu:$LATEST_TAG/" docker/create-custom-user-ubuntu
+          if [[ "$LATEST_TAG" != "$(cat docker/create-custom-user-ubuntu | grep 'FROM ubuntu:' | awk -F ':' '{print $2}')" ]]; then
+            sed -i "s/FROM ubuntu:.*/FROM ubuntu:$LATEST_TAG/" docker/create-custom-user-ubuntu
+          fi
       - name: Commit and push changes
+        if: ${{ steps.update_image.outputs.modified == 'true' }}
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
