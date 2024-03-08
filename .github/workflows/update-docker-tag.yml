@@ -13,14 +13,19 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
       - name: Find latest tag & Update Dockerfile
+        id: find-latest-tag
         run: |
           LATEST_TAG=$(curl -s 'https://hub.docker.com/v2/repositories/library/ubuntu/tags' -H 'Content-Type: application/json' | jq -r '.results[]| .name' | grep jammy |head -n 1)
           echo "Latest tag: $LATEST_TAG"
           if [[ "$LATEST_TAG" != "$(cat docker/create-custom-user-ubuntu | grep 'FROM ubuntu:' | awk -F ':' '{print $2}')" ]]; then
             sed -i "s/FROM ubuntu:.*/FROM ubuntu:$LATEST_TAG/" docker/create-custom-user-ubuntu
+            FILE_CHANGED=true
+          else
+            FILE_CHANGED=false
           fi
+          echo "$FILE_CHANGED" >> "$GITHUB_OUTPUT"
       - name: Commit and push changes
-        if: ${{ steps.update_image.outputs.modified == 'true' }}
+        if: ${{ steps.find_latest_tag.outputs.FILE_CHANGED == 'true' }}
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
