@@ -1,6 +1,6 @@
 # syntax=docker/dockerfile:1.6.0
 
-FROM ubuntu:jammy-20240427
+FROM ubuntu:noble-20240429
 
 # Set up a custom user anka 
 
