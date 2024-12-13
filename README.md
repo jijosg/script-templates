@@ -19,3 +19,19 @@ Directory structure
 
 2 directories, 6 files
 ```
+
+## Shell script utilities
+
+This repository provides several shell script utilities to help you get started with common tasks:
+
+* `shell/boilerplate.sh`: A starting point for creating new bash scripts with error handling and argument parsing.
+* `shell/check-weather.sh`: Check the weather for different cities using the wttr.in service.
+* `shell/getopts.sh`: Demonstrates how to use getopts for parsing command-line arguments.
+
+## Repository management
+
+This repository also provides utilities for managing your repository:
+
+* GitHub Actions workflow in `.github/workflows/update-docker-tag.yml`: Automates the process of keeping Docker images up to date.
+* CLI helper commands in `docker/README.md`: Manage Docker volumes, images, and system cleanup.
+* Follow the directory structure and organization in `README.md` to maintain a clean and well-documented repository.
