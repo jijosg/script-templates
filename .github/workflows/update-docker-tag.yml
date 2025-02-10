@@ -2,8 +2,8 @@ name: Update docker tag to latest
 
 on:
   workflow_dispatch:
-  schedule:
-    - cron: "0 0 */7 * *"
+  #schedule:
+  #  - cron: "0 0 */7 * *"
 
 jobs:
   update_image:
